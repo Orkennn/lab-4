@@ -1,0 +1,94 @@
+from typing import Dict
+
+#sorry for late submission
+
+users = [
+
+]
+
+
+
+
+def authorization(email_input: str, password: str) -> None:
+    user = check_user_email(email_input)
+    if user and password == user.get('password'):
+        print("Succesfully connected")
+    else:
+        print("Wrong email or password")
+
+def create_user(user: dict) -> None:
+    users.append(user)
+    print(f"User created: {user}")
+
+def check_user_email(email: str) -> dict:
+    for user in users:
+
+        if user.get('email') == email:
+            return user
+
+    else:
+        return None
+
+def delete_user_from_list(user_email: str) -> None:
+     user = check_user_email(user_email)
+
+     if user is None:
+         print("user not found")
+
+     else:
+         users.remove(user)
+         print("user deleted successfully")
+
+
+
+
+while True:
+    action = input(
+        "Choose the action:\n"
+        "1: Create user\n"
+        "2: List users\n"
+        "3: Delete user\n"
+        "4: Authorize\n"
+        "5: Exit\n"
+    )
+
+    if action == '1':
+
+        email = input("enter email: ")
+        first_name = input("enter first name: ")
+        last_name = input("enter last name: ")
+        age = input("enter age: ")
+        address = input("enter address: ")
+        password = input("enter password: ")
+
+        user = {
+            'email': email,
+            'first_name': first_name,
+            'last_name': last_name,
+            'age': age,
+            'address': address,
+            'password': password,
+        }
+        create_user(user)
+
+
+
+    elif action == '2':
+        print(users)
+
+    elif action == '3':
+        user = input("enter your email: " )
+        delete_user_from_list(user)
+
+    elif action == "4":
+        email = input("Enter email: ")
+        password = input("Enter password: " )
+
+        if len(password) < 8:
+              print("wrong password")
+        else:
+            authorization(email,password)
+
+    elif action == "5":
+        print("exit")
+        break
